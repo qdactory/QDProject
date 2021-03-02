@@ -1,0 +1,76 @@
+﻿@{
+    var inner_checked_cmnt = "checked";
+
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <p class="text-left" style="display:none; float:left;">
+                        @*<img style="min-height:34px; max-height:34px; min-width:34px; max-width:34px !important;" class="lazy" data-src="https://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png" width="34" height="34" />*@
+                        <b>@Model.UserId</b>
+                    </p>
+                    <p class="text-right">
+                        <span class="fa fa-star @{ if (@Model.Rate > 0) {@inner_checked_cmnt }; } "></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 1) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 2) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 3) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 4) {@inner_checked_cmnt }; } "></span>
+                        <span style="color:darkgrey; display:block; margin-top:-10px;">@Model.Date</span>
+                    </p>
+                </div>
+                <div class="card-body text-center" dir="rtl" style="zoom:92%;">
+                    <p style="min-height:30px;">
+                        @Model.Text
+                    </p>
+                    <small><a href="/clinic/@Model.Instid/@Model.Instname">@Model.Instname</a></small>
+
+                    <hr />
+                    <span class="badge badge-light">
+                        @Model.Pol
+                        <br />
+                        حسن التعامل
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Stuf
+                        <br />
+                        الطاقم الطبي
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Know
+                        <br />
+                        الخبرة
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Punc
+                        <br />
+                        الدقة
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Rrec
+                        <br />
+                        الاستقبال
+                    </span>
+                    <div class="col" style="padding: 2px; margin-top:10px;">
+                        <div class="text-center" style="float:right">
+                            <label>الإعجابات</label>
+                            <sub class="like_counter_@Model.Id"  style="display:block">@Model.Likes</sub>
+                            @if (!Model.Liked)
+                            {
+                            <img style="cursor:pointer; margin:10px;" src="~/Content/icons/thumbs-up.svg" onclick="like(@Model.Id,$(this));"width="24" height="24" />
+                            }
+                            else
+                            {
+
+                            <img style="cursor:pointer; margin:10px;" src="~/Content/icons/thumbs-up-blue.svg" onclick="like(@Model.Id,$(this));"width="24" height="24"/>
+                            }
+
+                        </div>
+                        <div class="" style="float:left">
+                            <sub style="display:block">بلغ <img style="cursor:pointer" src="~/Content/icons/alert-circle.svg" onclick="report(@Model.Id);" width="24" height="24"/> </sub>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+}

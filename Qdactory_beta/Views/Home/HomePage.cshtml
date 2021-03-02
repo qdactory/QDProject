@@ -1,0 +1,143 @@
+﻿@model Qdactory_beta.Models.Home
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .left-arrow-slide {
+        margin-top: 59px;
+        position: absolute;
+        left: 10px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        border-style:solid;
+        border-width:thin;
+        text-align: center;
+        align-items: center;
+    
+
+    }
+    .right-arrow-slide {
+        margin-top: 59px;
+        position: absolute;
+        right: 10px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        border-style: solid;
+        border-width: thin;
+        text-align: center;
+        align-items: center;
+    }
+
+    }
+
+    #user-menu .text-muted, #user-menu .btn-link {
+        color: white !important;
+    }
+
+    .checked {
+        color: orange;
+    }
+
+    .card {
+        background-color: #ddd3;
+    }
+
+    .inst_list img {
+        width: 100%;
+        min-height: 125px;
+        max-height: 125px;
+    }
+
+    .inst_list .card-body {
+        min-height: 106.5px;
+        max-height: 106.5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .starz_spans {
+        margin-top: auto;
+    }
+
+    .doc_list img {
+        width: 100%;
+        min-height: 125px;
+        max-height: 125px;
+    }
+
+    .doc_list .card-body {
+        min-height: 106.5px;
+        max-height: 106.5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .department-list img {
+        min-width: 32px;
+        min-height: 32px;
+        max-width: 32px;
+        max-height: 32px;
+    }
+</style>
+<div class="text-right mt-4">
+    <h6>@ViewBag.Label_medical_departments </h6>
+    <span class="text-left"><input id="search_dept" class="form-control" style=" box-shadow: none; border: 0; width:180px;" type="text" placeholder="@ViewBag.Placeholder_search_by_dep_name" /></span>
+    <hr />
+
+    <div class="row d-none">
+        <button class="left-arrow-slide"><</button>
+        <button class="right-arrow-slide">></button>
+    </div>
+        <div class="owl-carousel department-list owl-theme">
+            @foreach (var dept in @Model.departments)
+        {
+            <partial name="_departments_carousel_card" model="dept" />
+        }
+
+        </div>
+
+    <hr />
+</div>
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col text-right mt-4">
+        <h6>@ViewBag.Label_institutes <a class="btn btn-link pull-left search_inst">@ViewBag.Button_search_inst</a></h6>
+        <hr>
+        <div class="row row-cols-1 row-cols-md-4 row-cols-lg-3 inst_list">
+            @foreach (var inst in @Model.institutes)
+            {
+                <partial name="_clinic_list_default" model="inst" />
+            }
+        </div>
+
+        <a href="/clinics/@ViewBag.Lang/@ViewBag.Country-@ViewBag.City" class="btn-link text-right">@ViewBag.Link_more</a>
+    </div>
+    <div class="col text-right mt-4">
+        <h6>@ViewBag.Label_spec_doctors</h6>
+        <hr>
+       
+        <div class="row row-cols-1 row-cols-md-4 row-cols-lg-3 doc_list">
+            @foreach (var doc in @Model.doctors)
+            {
+                <partial name="_doctor_list_default" model="doc" />
+            }
+
+        </div>
+       
+    </div>
+</div>
+<partial name="_footer_info" />
+<div style="min-height:100px"></div>
+<script type="text/template" id="tempDoctor">
+    <div class="col-6 mb-4">
+        <div class="card">
+            <img onclick="window.open('{{Profile_url}}','_SELF')" style="width:100%" src="{{icon}}" class="card-img-top" alt="..." />
+            <div class="card-body" style="padding:0.25rem">
+                <h5 class="card-title text-center" style="font-size:14px; color:#0979C0; margin-top:-5px;"><a href="doc.Profile_url">{{names}}</a></h5>
+                <div class="text-center"><small>{{dept_name}}</small></div>
+                <p class="card-text text-center">
+                    {{rate}}
+                </p>
+            </div>
+        </div>
+    </div>
+</script>

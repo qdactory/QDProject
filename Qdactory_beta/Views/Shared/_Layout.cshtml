@@ -1,0 +1,826 @@
+﻿<!doctype html>
+<html lang="@ViewBag.Lang">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/owlcarousel/dist/assets/owl.theme.default.min.css">
+
+    <title>@ViewBag.Title</title>
+    <meta name="author" content="@ViewBag.Author" />
+    <meta name="robots" content="@ViewBag.Robots" />
+    <meta name="revisit-after" content="@ViewBag.Visits" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Desc" />
+    <meta property="og:type" content="@ViewBag.Type" />
+    <meta property="og:image" itemprop="image" content="@ViewBag.Image" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="300" />
+    <link rel="canonical" href="@ViewBag.Canonical" />
+    <style>
+     @@media (min-width: 414px) and (orientation:landscape) {
+        .promoted_docs .owl-item {
+            width: auto !important;
+        }
+    }
+    owl-theme .owl-controls .owl-page {
+    display: inline-block;
+}
+.owl-theme .owl-controls .owl-page span {
+    background: none repeat scroll 0 0 #869791;
+    border-radius: 20px;
+    display: block;
+    height: 12px;
+    margin: 5px 7px;
+    opacity: 0.5;
+    width: 12px;
+}
+     .promoted_docs .card-body {
+        min-height: 125px;
+        max-height: 125px;
+    }
+    .checked {
+        color: orange;
+    }
+    .card-header {
+        max-height: 36px;
+        background-color: white;
+        border-bottom-color: white;
+    }
+    .card {
+         background-color: #ddd3;
+    }
+    .department-list img {
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+    }
+    .doctor-profile {
+        border-radius: 50%;
+        border-top-style: solid;
+        border-color: dodgerblue;
+    }
+    #talkjs-container{
+        width: 100% !important;
+        margin: 0px !important;
+        height: 90vh !important;
+        margin-top: 0px !important;
+    }
+    .department-card .card {
+        min-height: 160px !important;
+        max-height:160px !important;
+    }
+    .body {
+        font-family: 'Cairo', sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+        .qd_bottom_border {
+            border-bottom: 0.1rem solid #60A4D1;
+        }
+
+        .bg-info {
+            background-color: #60A4D1 !important;
+        }
+
+        .roundedbox {
+            border-radius: 18px;
+            width: 220px !important;
+        }
+
+        .overit {
+            background-color: #0979C0;
+        }
+
+        .btn-circle {
+            border-radius: 50%;
+        }
+    .modal-title {
+        color: #0979C0;
+        font-size: 12px;
+    }
+    h6 {
+        color: #0979C0;
+    }
+    .force-white-font{
+        color:white !important;
+    }
+
+    </style>
+</head>
+<body class="body">
+
+    <nav class="navbar navbar-light bg-light qd_bottom_border">
+        <a class="navbar-brand" href="/">
+            <img src="https://qayimdactory.com/fanartec/qayimdactory/images/logo.png" height="30" width="54" alt="قيم دكتوري">
+        </a>
+        <a href="javascript:;" class="login_btn_header" onclick="user_side_bar()">
+            @{
+                if (ViewBag.LoggedIn)
+                {
+                    <img src="~/Content/icons/menu.svg" width="24" height="24">
+                }
+                else
+                {
+                    <span>@ViewBag.Button_login</span>
+                }
+            }
+        </a>
+    </nav>
+    <div class="container">
+        @ViewBag.Test
+        <form class="form-inline text-center chat" style="margin-top:10px; ">
+            <input id="search_doctor" class="form-control roundedbox text-center mx-auto" type="search" placeholder="@ViewBag.Placeholder_search_by_doctor_name" aria-label="Search">
+
+        </form>
+        <div class="text-center chat">
+            <a href="~/@ViewBag.Lang/signup/doctor/@ViewBag.Country-@ViewBag.City" id="are_you_doctor" class="btn btn-link  text-center mx-auto" style="font-size:12px;">@ViewBag.Link_are_you_doctor</a>
+            <sub onclick="$('#searchsettings').modal();" style="margin-top:15px; display:block; color:white; cursor:pointer;">@ViewBag.CountryAndCity</sub>
+        </div>
+        <div class="text-center">
+            <div id="user-menu" style="display:none; padding:20px; margin-top:15vh; color:white;">
+                @{
+                    if (ViewBag.LoggedIn)
+                    {
+                        <partial name="_pat_side_bar" />
+                    }
+                    else
+                    {
+                        if (ViewBag.SideBar)
+                        {
+                            <partial name="_SignUp" />
+                        }
+
+                    }
+
+                }
+
+
+            </div>
+        </div>
+        <div class="page">
+            <div id="place_toast" aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 10px;">
+            </div>
+            @RenderBody()
+        </div>
+        <div style="padding-top:15px;" class="search_results row row-cols-1 row-cols-md-4 row-cols-lg-6">
+            <ul class="list-unstyled">
+            </ul>
+        </div>
+    </div>
+    <button onclick="search_off()" id="closebtn_arrow" class="btn btn-circle" style="display:none; position:fixed; top:10px; left:20px;">
+        <img src="~/Content/icons/arrow-left.svg" width="24" height="24">
+    </button>
+    @*<button onclick="search_off()" id="closebtn" style="display: none; justify-content: center; align-items: center; position: fixed; left: 0; top:85vh; width: 100%; height: 50px;" class="btn btn-circle ">
+
+        <img src="~/Content/icons/x-circle.svg" width="24" height="24">
+    </button>*@
+
+    <div class="fixed-bottom chat">
+        <div class="bg-info clearfix">
+            <button data-toggle="modal" data-target="#searchsettings" type="button" class="btn  float-left"><img src="~/Content/icons/globe.svg" width="24" height="24"><span style=" margin-left: 10px; color: #D4E8F4; font-size: 8px;">@ViewBag.CountryAndCity</span></button>
+            <button type="button" class="btn  float-right"><img src="~/Content/icons/bell.svg" width="24" height="24"></button>
+        </div>
+    </div>
+    <!-- MODAL -->
+    <div class="modal fade" id="searchsettings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@ViewBag.Label_set_location </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right" dir="rtl">
+                    <select id="lang" class="form-control form-control-sm text-right">
+                        <option value="ar">اللغة</option>
+                        <option value="ar" selected>العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                    <select id="country" class="form-control form-control-sm text-right">
+                        <option>اختر الدولة</option>
+                        <option value="sa" selected>المملكة العربية السعودية</option>
+                    </select>
+                    <select id="city" class="form-control form-control-sm text-right">
+                        <option>اختر المدينة</option>
+                        <option>كل المدن</option>
+                        @{
+                            foreach (var city in @Model.cities)
+                            {
+
+                                <option value="@city.Names[0].Replace(' ', '_').ToLower()">@city.Names[1]</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">@ViewBag.Button_close</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="set_country_city()">@ViewBag.Button_save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div dir="rtl" class="page shars shars__visible shars__open js-view-shars">
+        <div class="shars__btn js-view-shars-btn">
+            <div class="icon icon_size-24 icon-share-wight js-icon-btn"></div>
+        </div>
+        <div class="shars__socials js-view-shars-social">
+            <div class="socials">
+                <div class="social__item ml-15">
+                    <div class="social_facebook" id="share-facebook" data-shareurl="@ViewBag.Url">
+                        <div class="icon icon_size-32 icon-facebook"></div>
+                    </div>
+                </div>
+                <div class="social__item ml-15">
+                    <div class="social_twitter" id="share-twitter" data-shareurl="@ViewBag.Url">
+                        <div class="icon icon_size-32 icon-twitter"></div>
+                    </div>
+                </div>
+                <div class="social__item ml-15">
+                    <div class="social_whatsapp" id="share-whatsapp" data-shareurl="@ViewBag.Url">
+                        <div class="icon icon_size-32 icon-whatsapp"></div>
+                    </div>
+                </div>
+                <div class="social__item">
+                    <div class="social_email" id="share-email" data-shareurl="@ViewBag.Url">
+                        <div class="icon icon_size-32 icon-email"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ReportComment" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">بلغ عن تعليق مسيء</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="min-height:300px;">
+                    <div class="ReportAfter text-center" style="display:none">
+                        <img class="text-center" width="60" src="https://media.tenor.com/images/cbae2dfd31aa5ec2fcb7f46b65e1550f/tenor.gif" />
+
+                    </div>
+                    <form class="ReportAfter">
+                        <input type="hidden" id="REV_ID" />
+
+                        <div class="form-group">
+                            <label>عنوان</label>
+                            <select class="form-control" id="Report_Subject">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >توضيح</label>
+                            <textarea class="form-control" id="Report_Content" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer ReportAfter">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                    <button type="button" onclick="SubmitReport()" class="btn btn-primary">ارسل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/template" id="searchDoctors">
+        <li class="media">
+            <img width="64" height="64" src="https://qayimdactory.com/profile_pics/{{icon}}" class="mr-3" alt="...">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1" style="color:white;"><a style="color: white !important" href="/doctor/{{id}}/{{names}}">{{names}}</a></h5>
+                <sub style="color:white;">
+                    {{dept_name}}</sub>
+
+            </div>
+        </li>
+    </script>
+    <script type="text/template" id="searchDoctorsEmpty">
+        <li class="media">
+            <img width="64" height="64" src="https://qayimdactory.com/profile_pics/{{icon}}" class="mr-3" alt="...">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1" style="color:white;"><a style="color: white !important" href="{{profile_url}}">{{names}}</a></h5>
+
+                    </div>
+</li>
+    </script>
+    <script type="text/template" id="searchInst">
+        <li class="media">
+            <img width="64" height="64" src="https://qayimdactory.com/profile_pics/{{icon}}" class="mr-3" alt="...">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1" style="color:white;"><a style="color:white!important" href="/ar/clinic/{{id}}/{{names}}">{{names}}</a></h5>
+
+            </div>
+        </li>
+    </script>
+    <script type="text/template" id="searchInst_mode_click">
+        <li class="media">
+            <img width="64" height="64" src="https://qayimdactory.com/profile_pics/{{icon}}" class="mr-3" alt="...">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1" style="color:white;"><a style="color:white!important" href="javascript:;" onclick="select_inst_name({{id}}, '{{names}}');">{{names}}</a></h5>
+
+            </div>
+        </li>
+    </script>
+    <script type="text/template" id="toast">
+        <!-- Flexbox container for aligning the toasts -->
+        <!-- Then put toasts within -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width:188px;">
+            <div class="toast-header">
+                <img width="24" src="https://statefireschool.delaware.gov/wp-content/themes/dosgic_SFS_theme/img/sfs-icons-notifications.png" class="rounded mr-2" alt="...">
+                <strong class="mr-auto">تنبيه</strong>
+                <small></small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{message}}
+            </div>
+        </div>
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="~/Content/owlcarousel/dist/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    @*<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>*@
+    <script>
+        var pagination = 0;
+        var search = "doc";
+        $(document).ready(function () {
+             $('.lazy').Lazy();
+            if (getCookie("setting") == null) {
+                GetLocation();
+            }
+            $('#share-facebook').click( function()
+            {
+                var shareurl = $(this).data('shareurl');
+                window.open('https://www.facebook.com/sharer/sharer.php?u='+escape(shareurl)+'&t='+document.title, '',
+                'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                return false;
+            });
+            $('#share-twitter').click( function()
+            {
+                var shareurl = $(this).data('shareurl');
+                window.open('https://twitter.com/intent/tweet?url='+escape(shareurl)+'&t='+document.title, '',
+                'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                return false;
+            });
+            $('#share-whatsapp').click( function()
+            {
+                var shareurl = $(this).data('shareurl');
+                window.open('whatsapp://send?text='+escape(shareurl)+'&t='+document.title, '',
+                'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                return false;
+            });
+            $('#share-email').click( function()
+            {
+                var shareurl = $(this).data('shareurl');
+                window.open('mailto:?Body='+escape(shareurl)+'&amp;subject='+document.title, '',
+                'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                return false;
+            });
+            $('.js-view-shars-btn').on("click", function () { $('.shars__socials ').toggle(); });
+            $(".owl-carousel").owlCarousel(
+
+                {
+                    dots:true
+                });
+            $('#search_doctor').on("keyup", function () {
+                $('.search_results').html("");
+
+                var url = "";
+                var render_str = "";
+
+                if (search == "doc") {
+                    url = "/api/doctors/search/@ViewBag.Country/@ViewBag.City/@ViewBag.Lang/";
+                    render_str = "searchDoctors";
+                }
+                else
+                    if (search == "searchInst_mode_click")
+                    {
+                        url = "/api/Institute/search/@ViewBag.Country/@ViewBag.City/";
+                        render_str = "searchInst_mode_click";
+                    }
+                else {
+                    url = "/api/Institute/search/@ViewBag.Country/@ViewBag.City/";
+                    render_str = "searchInst";
+                }
+
+                if ($(this).val().length > 3 && $.active == 0) {
+                    console.log($(this).val());
+
+
+                    $.ajax({
+                        url: url+$(this).val(),
+                        type: 'GET',
+                        dataType: 'json', // added data type
+                        success: function(res) {
+                            var data = res.data;
+                            console.log(data);
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].id == 0) {
+
+                                    $('.search_results').append(render($('#searchDoctorsEmpty').html(),data[i]));
+
+                                }
+                                else
+                                    $('.search_results').append(render($('#'+render_str).html(),data[i]));
+                                }
+                        }
+                    });
+                }
+
+
+            });
+
+
+
+
+
+            $('#search_dept').on('focus', function () {
+                    $('html,body').animate({
+                            scrollTop: $("#search_dept").offset().top-10},
+                            'slow');
+                });
+            $('#search_dept').on("keyup", function () {
+              //  $(".owl-carousel").trigger('to.owl.carousel', 0);
+
+
+                if ($(this).val().length > 2) {
+
+                   $('.department-card').hide();
+                    console.log($(this).val());
+                    var tag = $(this).val();
+                    $('.dept-tags').each(function (i, obj) {
+                        console.log("id="+Math.floor(i/3)+" id="+i);
+                        if ($(obj).text().indexOf(tag) >= 0) {
+
+                            $(obj).parent('.department-card').show();
+
+                            var loc = Math.floor(i / 3);
+                            $(".owl-carousel").trigger('to.owl.carousel', loc);
+                            return false;
+                        }
+                    });
+                }
+                else {
+                    $('.department-card').show();
+                }
+            });
+            $('.roundedbox').on("focus", function () {
+             search_on();
+            });
+            $('.search_inst').on("click", function () {
+            $('#search_doctor').val("");
+                $('#search_doctor').attr("placeholder", "@Html.Raw(@ViewBag.Placeholder_search_by_inst_name)");
+                search = "inst";
+                 search_on();
+            });
+
+            $('.search_inst_as_doctor').on("click", function () {
+                $('#search_doctor').val("");
+                $('#new_clinic').show();
+                $('#search_doctor').attr("placeholder", "اختر العيادة التي تعمل لديها");
+                search = "searchInst_mode_click";
+                search_on();
+            });
+
+            $('#usercomment').find("select").each(function (index, value) {
+              $(this).val($(value).attr("x-value"));
+            });
+        });
+        function select_inst_name(id, name) {
+            $('#val_inst_name').val(name);
+            $('#hv_instid').val(id);
+
+            search_off();
+            setTimeout(function () { $('#medical_id').focus(); }, 800);
+        }
+        function set_country_city_google(country,city) {
+            var lang = $('#lang').val();
+            var url = country + "-" + city;
+            setCookie("setting", lang + "-" + url, 1);
+            if(lang!="ar")
+                window.open("/" + lang + "/" + url, '_self');
+            else
+                window.open("/" + url, '_self');
+        }
+        function set_country_city() {
+            var country = $('#country').val();
+            var city = $('#city').val();
+            var lang = $('#lang').val();
+            var url = country + "-" + city;
+            setCookie("setting", lang + "-" + url, 1);
+            if(lang!="ar")
+                window.open("/" + lang + "/" + url, '_self');
+            else
+                 window.open("/" + url, '_self');
+        }
+        function user_side_bar() {
+            $('.body').addClass("overit");
+            $('nav').slideUp();
+            $('.fixed-bottom').hide();
+            $('.page').hide();
+            $('#search_doctor').hide();
+            $('#are_you_doctor').hide();
+            $('#user-menu').show();
+            $('#closebtn').css("display", "flex");
+            $('#closebtn_arrow').css("display", "flex");
+            $('#closebtn_arrow').addClass("rotate-arrow");
+        }
+        function search_on() {
+            $('.body').addClass("overit");
+            $('nav').slideUp();
+            $('.fixed-bottom').hide();
+            $('.page').hide();
+
+            $('#are_you_doctor').addClass('force-white-font');
+            $('#closebtn').css("display", "flex");
+            $('#closebtn_arrow').css("display", "flex");
+            $('#closebtn_arrow').addClass("rotate-arrow");
+        }
+        function search_off() {
+            $('#search_doctor').attr("placeholder", "@Html.Raw(@ViewBag.Placeholder_search_by_doctor_name)");
+            search = "doc";
+            $('.body').removeClass("overit");
+            $('nav').slideDown();
+            $('.fixed-bottom').show();
+            $('.page').show();
+            $('.search_results').html("");
+            $('#closebtn').css("display", "none");
+            $('#closebtn_arrow').css("display", "none");
+            $('#closebtn_arrow').removeClass("rotate-arrow");
+            $('#search_doctor').show();
+            $('#are_you_doctor').show();
+            $('#user-menu').hide();
+             $('#are_you_doctor').removeClass('force-white-font');
+        }
+        function go_to_profile() {
+            window.open("/profile/ar", "_SELF");
+        }
+        function logout() {
+            eraseCookie('user');
+            location.reload();
+        }
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        function eraseCookie(name) {
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        function GetLocation()
+        {
+            if ("geolocation" in navigator){ //check geolocation available
+	            //try to get user current location using getCurrentPosition() method
+	            navigator.geolocation.getCurrentPosition(function(position){
+                    console.log("Found your location \nLat : " + position.coords.latitude + " \nLang :" + position.coords.longitude);
+                    $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false&key=AIzaSyCnC_3UGyTb57lIeZbZfcYq1juZhOneRG4", function( data ) {
+                        var obj = data.results[0]["address_components"];
+                        var city = "";
+                        var country = "";
+                        obj.forEach(function (item, index) {
+                            if (item.types[0] == "country") {
+                                country = item.short_name.toLowerCase();
+                            }
+                            else
+                                if (item.types[0] == "locality") {
+                                    city = item.short_name.toLowerCase();
+                                }
+                        });
+                        console.log(country + " " + city);
+                        if (getCookie("setting")==null) {
+                            set_country_city_google(country, city);
+                        }
+                        });
+		            });
+            }else{
+	            console.log("Browser doesn't support geolocation!");
+            }
+        }
+        function LoadMore(what, from, lang) {
+            pagination++;
+
+             if (what == "doctors_rated_by_user_id" && from != null && from != "") {
+                $('.spinner-border').removeClass('d-none');
+                $('.load_more').attr("disabled", true)
+                $.ajax({
+                    url: "/api/pat/doctors/loadmore/" + lang + "/" + from.toLowerCase() + "/"+ pagination,
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function (res) {
+                        var doctors = res.data;
+                        department_loadmore(doctors);
+                    }
+                });
+            }
+            else
+            if (what == "doctors_in_department" && from != null && from != "") {
+                $('.spinner-border').removeClass('d-none');
+                $('.load_more').attr("disabled", true)
+                $.ajax({
+                    url: "/api/doctors/loadmore/" + lang + "/" + from.toLowerCase() + "/@ViewBag.Country/@ViewBag.City/" + pagination,
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function (res) {
+                        var doctors = res.Data;
+                        department_loadmore(doctors);
+                    }
+                });
+            }
+            else
+                if (what == "comments_in_doctor_page" && from != null && from != "") {
+                    $('.spinner-border').removeClass('d-none');
+                    $('.load_more').attr("disabled", true)
+                    $.ajax({
+                        url: "/api/doctors/" + from + "/comments/" + pagination+"/@ViewBag.Lang",
+                        type: 'GET',
+                        dataType: 'json', // added data type
+                        success: function (res) {
+                            var comments = res.data;
+                            comments_loadmore(comments);
+                        }
+                    });
+                }
+                else
+                    if (what == "doctors_within_inst" && from != null && from != "") {
+                        $('.spinner-border').removeClass('d-none');
+                    $('.load_more').attr("disabled", true)
+                    $.ajax({
+                        url: "/api/Institute/" + from + "/doctors/loadmore/ar/" + pagination,
+                        type: 'GET',
+                        dataType: 'json', // added data type
+                        success: function (res) {
+                            var doctors = res.data;
+                           inst_doc_loadmore(doctors);
+                        }
+                    });
+                    }
+        }
+        function render(template, data) {
+            for (const [key, value] of Object.entries(data)) {
+                if (key == "names") {
+                    template = template.replace("{{" + key + "}}", value[1]);
+                    template = template.replace("{{" + key + "}}", value[1]);
+                }
+                else {
+                    template = template.replace("{{" + key + "}}", value);
+                    template = template.replace("{{" + key + "}}", value);
+                }
+            }
+            return template;
+        }
+        function validateCookie(token) {
+                var form = { Token:token };
+        $.ajax({
+            type: "POST",
+            url: "/api/member/token/validate",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+        function CheckUserIsLogged() {
+            if (getCookie("user") != null) {
+                validateCookie(getCookie("user"));
+            }
+        }
+        function validateEmail(email) {
+          const re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+        }
+
+        function toast_message(message) {
+
+            var _toast = $('#toast').html().replace("{{message}}", message);
+            $('#place_toast').html(_toast);
+            $('.toast').toast({ autohide: false });
+
+            $('.toast').toast('show');
+        }
+
+        function like(id,div) {
+            //alert("like" + id);
+           
+            if (getCookie("user") == null) {
+                user_side_bar();
+                return false;
+            }
+            var form = { REV_ID: id, Token: getCookie("user") };
+            console.log(form);
+            
+            $.ajax({
+                type: "POST",
+                url: "/api/comments/like",
+                async: true,
+                cache: false,
+                type: 'POST',
+                data: form,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.code == "000.000.000") {
+                        if (div.attr("src") == "/Content/icons/thumbs-up.svg") {
+                             var num = parseInt($.trim($('.like_counter_' + id).html()));
+                            $('.like_counter_' + id).html(++num)
+                            div.attr("src", "/Content/icons/thumbs-up-blue.svg");
+                        }
+                        else {
+                             var num = parseInt($.trim($('.like_counter_' + id).html()));
+                            $('.like_counter_' + id).html(--num)
+                             div.attr("src", "/Content/icons/thumbs-up.svg");
+                        }
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    alert(exception);
+                }
+            });
+        }
+        function SubmitReport() {
+            
+            if (!getCookie("user") == null) {
+                user_side_bar();
+                return false;
+            }
+            else {
+            var id = $('#REV_ID').val();
+            var subject = $('#Report_Subject').val();
+            var content = $('#Report_Content').val();
+            var form = {Id:id, Token:getCookie("user"),Subject:subject,Content:content };
+            $.ajax({
+                type: "POST",
+                url: "/api/comments/report",
+                async: true,
+                cache: false,
+                type: 'POST',
+                data: form,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.code == "000.000.000") {
+
+                        $('.ReportAfter').toggle();
+                        setTimeout(function () { $('.ReportAfter').toggle(); $('#ReportComment').modal("hide"); }, 8000);
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    alert(exception);
+                }
+            });
+            }
+
+        }
+        function report(id) {
+            //alert("report" + id);
+            if (!getCookie("user") == null) {
+                user_side_bar();
+                return false;
+            }
+            else {
+                $('#REV_ID').val(id);
+                $('#ReportComment').modal();
+            }
+
+        }
+    </script>
+</body>
+</html>

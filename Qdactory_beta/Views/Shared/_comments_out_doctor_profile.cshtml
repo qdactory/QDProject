@@ -1,0 +1,64 @@
+﻿@{
+       var inner_checked_cmnt = "checked";
+
+<div class="col mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <p class="text-left" style="display:inline; float:left;">
+                        <img style="min-height:34px; max-height:34px; min-width:34px; max-width:34px !important;" height="34" width="34" data-src="https://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png" class="lazy"/>
+                        <b>@Model.UserId</b>
+                    </p>
+                    <p class="text-right">
+
+                        <span class="fa fa-star @{ if (@Model.Rate > 0) {@inner_checked_cmnt }; } "></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 1) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 2) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 3) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@Model.Rate > 4) {@inner_checked_cmnt }; } "></span>
+
+                        <span style="color:darkgrey; display:block; margin-top:-10px;">@Model.Date</span>
+                    </p>
+                </div>
+                <div class="card-body text-center" dir="rtl" style="zoom:92%;">
+                    <p style="min-height:30px;">
+                        @Model.Text
+                    </p>
+                    <small>@Model.Instname</small>
+
+                    <hr />
+                    <span class="badge badge-light">
+                        @Model.Pol
+                        <br />
+                        حسن التعامل
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Stuf
+                        <br />
+                        الطاقم الطبي
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Know
+                        <br />
+                        الخبرة
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Punc
+                        <br />
+                        الدقة
+                    </span>
+                    <span class="badge badge-light">
+                        @Model.Rrec
+                        <br />
+                        الاستقبال
+                    </span>
+                    <div class="row mt-2" style="padding: 2px;">
+                        <div class="text-left">
+                            <label>الإعجابات</label>
+                            <sub style="display:block">@Model.Likes</sub>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+}

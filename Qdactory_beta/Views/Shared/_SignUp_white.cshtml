@@ -1,0 +1,338 @@
+﻿
+<style>
+    .sign_up  label{
+        color:black;
+
+    }
+    .sign_up small {
+        color: black !important;
+    }
+
+    .sign_in label {
+        color: black;
+    }
+
+    .sign_in small {
+        color: black !important;
+    }
+
+    .sign_in .btn-link {
+        color: black;
+    }
+    .login_btn_header{
+        display:none !important;
+    }
+    .sign_up .btn-link {
+        color: black !important;
+    }
+</style>
+    <div style="max-width:600px; margin-bottom:60px;" class="mx-auto">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col text-center" style="background-color: #0979C0; min-height:300px;">
+                <h3 style="color:white; margin-top:10vh">سجل على قيم دكتوري</h3>
+                <h6 class="text-center" style="color:white;">لتحظى بكافة الخدمات</h6>
+                <img class="text-center lazy" style="position: absolute; bottom: 20px; left: 36%;" data-src="https://images.vexels.com/media/users/3/147758/isolated/preview/82e38ee75c17a68e56eb6e82b604deb7-doctor-stethoscope-icon-by-vexels.png" height="87" width="87" alt="قيم دكتوري">
+            </div>
+            <div class="col" style="padding:10px;">
+                <div class="sign_in">
+                    <form>
+                        <div class="err_login" style="padding:4px;">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">بيانات المستخدم</label>
+                            <input type="text" class="form-control" id="Mobile" aria-describedby="emailHelp">
+                            <small id="MobileHelp" class="form-text text-muted">يمكنك استخدام البريد الإلكتروني أو رقم الجوال</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">كلمة المرور</label>
+                            <input type="password" class="form-control" id="Password">
+                            <small id="PasswordHelp" class="form-text text-muted"></small>
+                        </div>
+                        <button type="button" onclick="login();" class="btn btn-primary">تسجيل دخول</button>
+                        <hr />
+                        <button type="button" onclick="user_signup_or_login()" class="btn btn-link">ليس لديك حساب؟</button>
+                    </form>
+                </div>
+                <div class="sign_up" style="display:none">
+                    <form>
+                       <div class="err_signup" style="padding:4px">
+
+                       </div>
+                       <div class="signup_step_one">
+                           <div class="form-group">
+                               <label>رقم الجوال</label>
+                               <div class="row">
+                                   <div class="col-3">
+                                       <select class="form-control">
+                                           <option>+966</option>
+                                       </select>
+                                   </div>
+                                   <div class="col-9">
+                                       <input type="number" class="form-control" id="signup_mobile" aria-describedby="emailHelp">
+
+                                   </div>
+                               </div>
+                               <small id="emailHelp" class="form-text text-muted">لن يتم استخدام رقم الجوال للدعاية</small>
+                           </div>
+                           <div class="form-group">
+                               <label>البريد الإلكتروني</label>
+                               <input type="email" class="form-control" id="signup_email" aria-describedby="emailHelp">
+                               <small id="emailHelp" class="form-text text-muted">لن يتم مشاركة بريدك الإلكتروني</small>
+                           </div>
+                           <div class="form-group">
+                               <label>كلمة المرور</label>
+                               <input type="password" class="form-control" id="signup_password">
+                           </div>
+                           @*<div class="form-group">
+                               <label>تاريخ الميلاد</label>
+                               <input type="date" id="signup_dob" class="form-control" />
+                           </div>
+                           <div class="form-group">
+                               <label>الجنس</label>
+                               <select class="form-control" id="signup_gender">
+                                   <option value="M ">ذكر</option>
+                                   <option value="F">انثى</option>
+                               </select>
+                           </div>*@
+                           <div class="form-group form-check">
+                               <input onclick="$('.btn-signup').toggle();" type="checkbox" class="form-check-input" id="signup_terms">
+                               <label class="form-check-label">أوافق على جميع الشروط</label>
+                           </div>
+                           <button style="display:none" type="button" onclick="signup()" class="btn btn-primary btn-signup">تسجيل حساب جديد</button>
+
+                       </div>
+                       <div class="signup_step_one" style="display:none">
+                           <div class="ver_error" style="padding:4px;"></div>
+
+                          <div class="form-group">
+                              
+                              <label>رمز التوثيق للجوال</label>
+                              <input type="number" id="sms_code" />
+                              <br/>
+                              <button onclick="verify_phone()" type="button" class="btn btn-outline-info">
+                                  توثيق رقم الجوال
+                              </button>
+                              <hr/>
+                              <p>ستصلك رسالة خلال 30 ثانية</p>
+                              <button class="mt-4 btn btn-danger smscode" style="display:none"  onclick="get_sms_code();">
+                                  لم تصلك الرسالة؟
+                              </button>
+                          </div>
+
+                       </div>
+                           <hr />
+                           <button type="button" onclick="user_signup_or_login()" class="btn btn-link">لديك حساب؟ سجل الدخول الآن</button>
+
+</form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function get_sms_code() {
+        $('.smscode').hide();
+    }
+    function verify_phone() {
+        $('.ver_error').html("");
+        if ($('#sms_code').val() == "") {
+            $('.ver_error').html("INVALID_CODE");
+            return false;
+        }
+        var form = {
+            Mobile: $('#signup_mobile').val(),
+            Email: $('#signup_email').val(),
+            Password: $('#signup_password').val(),
+            //DOB: $('#signup_dob').val(),
+            //Gender:$('#signup_gender').val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/api/members/verify/" + $('#sms_code').val(),
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                eraseCookie("user");
+                console.log(result);
+                if (result.code == "000.000.000") {
+
+                    login_direct($('#signup_email').val(), $('#signup_password').val());
+                    
+                }
+                else {
+
+                    $('.ver_error').html("<p style='color:red'>"+result.message+"</p>");
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function alert_text(x) {
+        $('.err_signup').html("<p style='color:red'>"+x+"</p>");
+    }
+    function signup() {
+        $('.smscode').hide();
+
+        
+        var form = {
+            Mobile: $('#signup_mobile').val(),
+            Email: $('#signup_email').val(),
+            Password: $('#signup_password').val(),
+            //DOB: $('#signup_dob').val(),
+            //Gender:$('#signup_gender').val()
+        };
+
+        
+        $('.err_signup').html("");
+
+                if ($('html').attr('lang') == "ar") {
+
+            if (form.Mobile == null || form.Mobile == "" || !isdigit(form.Mobile)) {
+                alert_text("رقم الجوال غير صحيح");
+                return false;
+            }
+
+            if (form.Password == null || form.Password == "" || !isdigit(form.Password)) {
+                alert_text("الرجاء ادخال كلمة المرور بشكل صحيح");
+                return false;
+            }
+
+             if (form.Email == null || form.Email == "" || !validateEmail(form.Email)) {
+                alert_text("البريد الإلكتروني غير صحيح");
+                return false;
+            }
+            
+        }
+        $.ajax({
+            type: "POST",
+            url: "/api/members/newaccount",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                eraseCookie("user");
+                console.log(result);
+                if (result.code == "000.000.000") {
+
+                    $('.signup_step_one').toggle();
+                    setTimeout(function () { $('.smscode').toggle(); }, 30000);
+                }
+                else {
+
+                    
+                    if ($('html').attr('lang') == "ar") {
+                        if (result.message == "MOBILE_NOT_PROVIDED")
+                            result.message = "الرجاء ادخال رقم الجوال";
+                        else
+                            if (result.message == "PASS_NOT_PROVIDED")
+                                result.message = "لم يتم ادخال كلمة المرور";
+                            else
+                                if (result.message == "EMAIL_NOT_PROVIDED")
+                                    result.message = "الرجاء ادخال البريد الإلكتروني";
+                    }
+                    else {
+                        if (result.message == "MOBILE_NOT_PROVIDED")
+                        result.message = "please provice mobile";
+                        else
+                        if (result.message == "PASS_NOT_PROVIDED")
+                        result.message = "please provide password";
+                        else
+                        if (result.message == "EMAIL_NOT_PROVIDED")
+                            result.message = "please provide email address";
+                    }
+
+                    $('.err_signup').html("<p style='color:red'>"+result.message+"</p>");
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function login_direct(email,password) {
+        var form = { Email: email, Password: password };
+        $.ajax({
+            type: "POST",
+            url: "/api/members/login",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                eraseCookie("user");
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    if (result.data.email != null && result.data.email != "") {
+
+                        setCookie("user", result.data.email, 1);
+                        location.reload();
+                    }
+                    else {
+                        alert("INVALID_LOGIN_INFO");
+                    }
+                }
+                else {
+                    alert(result.message);
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function login() {
+        var form = { Mobile: $('#Mobile').val(), Password: $('#Password').val() };
+        if (validateEmail($('#Mobile').val())) {
+            form = { Email: $('#Mobile').val(), Password: $('#Password').val() };
+        }
+         $('.err_login').html("");
+        $.ajax({
+            type: "POST",
+            url: "/api/members/login",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                eraseCookie("user");
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    if (result.data.email != null && result.data.email != "") {
+
+                        setCookie("user", result.data.email, 1);
+                        location.reload();
+
+
+                    }
+                    else {
+                        alert("INVALID");
+                    }
+                }
+                else {
+
+                    $('.err_login').html("<p style='color:red'>كلمة المرور أو رقم الجوال غير صحيح</p>");
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function user_signup_or_login() {
+        $('.sign_in').toggle();
+        $('.sign_up').toggle();
+    }
+</script>
+
+
+

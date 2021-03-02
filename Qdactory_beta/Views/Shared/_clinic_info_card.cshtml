@@ -1,0 +1,56 @@
+﻿@{
+
+    var inner_checked_doc = "checked";
+}
+<div class="col-sm-12 col-lg-6 text-center">
+    <div style="background-color: white !important;">
+        <img style="width:150px; height:150px;" data-src="@Model.info.Icon" class="lazy" alt="...">
+    </div>
+</div>
+<div class="col-sm-12 col-lg-5 mt-3">
+    <div class="mx-auto" style="max-width:400px;">
+        <div style="min-height:110px; padding:12px;">
+            <h1 class="text-center" style="font-size:18px;">@Model.info.Names[ViewBag.LangId]</h1>
+            <h4 class="text-center">@Model.info.City_name</h4>
+
+            @if (Model.info.Inst_verified == "N")
+            {
+
+                <div class="text-center" style="padding:10px;">
+                    <a href="/ar/signup/institute/sa-jeddah" class="btn btn-link text-center">هل أنت صاحب هذه المنشأة؟</a>
+                </div>
+
+            }
+            <div class="row mx-auto" style="width: 168px;">
+                <div class="col-6 text-center" style="border-right:solid #808080">
+                    @Model.info.Rate / 5
+                    <label style="font-size:10px; display:block; margin-bottom:1.5rem">التقييم العام</label>
+
+                </div>
+                <div class="col-6 text-center" style="border-left:solid #808080">
+                    @Model.info.Total
+                    <label style="font-size:10px; display:block">التقييمات</label>
+                </div>
+            </div>
+            <div class="row mx-auto" style="width:168px;">
+                <p class="text-center mx-auto mt-2" style=" -webkit-box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);
+box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);">
+                    <span class="fa fa-star @{ if (@Model.info.Rate > 0) {@inner_checked_doc}; } "></span>
+                    <span class="fa fa-star @{ if (@Model.info.Rate > 1) {@inner_checked_doc}; }"></span>
+                    <span class="fa fa-star @{ if (@Model.info.Rate > 2) {@inner_checked_doc}; }"></span>
+                    <span class="fa fa-star @{ if (@Model.info.Rate > 3) {@inner_checked_doc}; }"></span>
+                    <span class="fa fa-star @{ if (@Model.info.Rate > 4) {@inner_checked_doc}; } "></span>
+                </p>
+            </div>
+        </div>
+        <div class="doctor-tool row text-center">
+            <div class="col text-right">
+                <a href="javascript:;" class="btn btn-danger make-app" onclick="book_appointment('@ViewBag.InstId','@ViewBag.Lang')" style="width:98px;">احجز موعد</a>
+            </div>
+            <div class="col text-left">
+                <a href="" class="btn btn-info" style="width:98px;">اتصل بنا</a>
+            </div>
+        </div>
+    </div>
+</div>

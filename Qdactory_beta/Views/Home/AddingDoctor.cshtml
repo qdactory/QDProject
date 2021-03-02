@@ -1,0 +1,248 @@
+﻿@model Qdactory_beta.Models.Home
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+
+    .card {
+        background-color: #ddd3;
+    }
+
+    .inst_list img {
+        width: 100%;
+        min-height: 125px;
+        max-height: 125px;
+    }
+
+    .inst_list .card-body {
+        min-height: 106.5px;
+        max-height: 106.5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .starz_spans {
+        margin-top: auto;
+    }
+
+    .doc_list img {
+        width: 100%;
+        min-height: 125px;
+        max-height: 125px;
+    }
+
+    .doc_list .card-body {
+        min-height: 106.5px;
+        max-height: 106.5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .department-list img {
+        min-width: 32px;
+        min-height: 32px;
+        max-width: 32px;
+        max-height: 32px;
+    }
+</style>
+
+<div class="post_success_comment">
+    <partial name="_ShowCaseAddingDoctor" />
+</div>
+
+@{
+    if (ViewBag.LoggedIn)
+    {
+    <div class="post_success_comment text-center" style="display:none">
+        <img width="100" src="https://static.wixstatic.com/media/ce46d9_3f38fd870f0e44df928485e2e1c7686b~mv2.gif" />
+        <h6 class="text-center">شكرا لك سيتم تنبيهك في حال تم الموافقة على اضافة الطبيب</h6>
+    </div>
+    <form style="max-width:600px" class="mx-auto post_success_comment">
+        <div class="form-group">
+            <label>الاسم الأول للطبيب</label>
+            <input type="text" class="form-control" id="DOC_FNAME" placeholder="الاسم الأول">
+        </div>
+        <div class="form-group">
+            <label>الاسم الاخير للطبيب</label>
+            <input type="text" class="form-control" id="DOC_LNAME" placeholder="الاسم الأخير">
+        </div>
+        <div class="form-group">
+            <label>الجنس</label>
+            <select class="form-control" id="DOC_GENDER">
+                <option value="M">ذكر</option>
+                <option value="F">أنثى</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>الدرجة</label>
+            <select class="form-control" id="DOC_RANK">
+                
+                @{
+                    foreach(var r in @Model.Ranks)
+                    {
+                        <option value="@r.Id">@r.Post_name</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="text-right mt-4">
+                <h6>@ViewBag.Label_medical_departments </h6>
+                <span class="text-left"><input id="search_dept" class="form-control" style=" box-shadow: none; border: 0; width:180px;" type="text" placeholder="ابحث عن التخصص" /></span>
+                <hr>
+                <div class="owl-carousel department-list">
+
+                    @{
+                                    foreach (var dept in @Model.departments)
+                                    {
+                        <div class="col department-card">
+                            <span class="d-none dept-tags">
+                                @dept.Tags
+                            </span>
+                            <div class="card mb-3 text-center" style="padding:2px;">
+                                <a href="javascript:;" onclick="select_dept(@dept.Id,'@dept.Names[ViewBag.LangId]')">
+                                    <img src="@dept.Icon" />
+                                    <br />
+                                    <lable class="text-center">@dept.Names[ViewBag.LangId]</lable>
+                                </a>
+                            </div>
+                        </div>
+                                    }
+                    }
+
+
+                </div>
+                <h6 id="dept_name_selected"></h6>
+                <hr />
+            </div>
+
+        </div>
+        <input type="hidden" id="hv_deptid" />
+        <div class="form-group">
+            <label>المدينة</label>
+            <select class="form-control" id="DOC_CITY">
+                @{
+                    foreach (var city in @Model.cities)
+                    {
+                        <option value="19">@city.Names[1]</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>العيادة</label>
+            <input type="text" class="form-control search_inst_as_doctor" id="val_inst_name" placeholder="اسم العيادة">
+            <input type="hidden" id="hv_instid" />
+        </div>
+        <div class="form-group err_add_doctor">
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-primary" type="button" onclick="add_doctor()">اضف الطبيب</button>
+            <button class="btn btn-outline-danger" type="reset">مسح</button>
+        </div>
+    </form>
+    }
+    else
+    {
+<partial name="_SignUp_white" />
+
+    }
+}
+<div style="min-height:100px"></div>
+<script>
+    function select_dept(id, name) {
+        $('#hv_deptid').val(id);
+        $('.department-list').toggle();
+        $('#dept_name_selected').html(name + " <span style='cursor:pointer' onclick='select_dept_again()'>X</span>")
+    }
+    function select_dept_again() {
+        $('.department-list').toggle();
+        $('#dept_name_selected').html("");
+
+    }
+    function add_doctor() {
+        $('.err_add_doctor').html("");
+        var token = getCookie('user');
+        var DOC_FNAME = $('#DOC_FNAME').val();
+        var DOC_LNAME = $('#DOC_LNAME').val();
+        var DOC_GENDER = $('#DOC_GENDER').val();
+        var DOC_RANK = $('#DOC_RANK').val();
+        var DOC_DEP = $('#hv_deptid').val();
+        var DOC_CITY = $('#DOC_CITY').val();
+        var DOC_INST_ID = $('#hv_instid').val();
+
+        var form = {
+            Fname: DOC_FNAME,
+            Lname: DOC_LNAME,
+            Gender: DOC_GENDER,
+            Rank: DOC_RANK,
+            DeptId: DOC_DEP,
+            CityId: DOC_CITY,
+            InstId: DOC_INST_ID,
+            Token:token
+        };
+
+        if (form.Fname == null || form.Fname == "") {
+            $('.err_add_doctor').html("<span style='color:red'>خطأ في ادخال الاسم الأول</span>");
+            return false;
+        }
+        else
+        if (form.Lname == null || form.Lname == "") {
+            $('.err_add_doctor').html("<span style='color:red'>خطأ في ادخال الاسم الاخير</span>");
+            return false;
+        }
+        else
+        if (form.Rank == null || form.Rank == "") {
+            $('.err_add_doctor').html("<span style='color:red'>الرجاء ادخال الدرجة</span>");
+            return false;
+        }
+        else
+        if (form.Gender == null || form.Gender == "") {
+            $('.err_add_doctor').html("<span style='color:red'>الرجاء ادخال الجنس</span>");
+            return false;
+        }
+        else
+        if (form.DeptId == null || form.DeptId == "") {
+            $('.err_add_doctor').html("<span style='color:red'>الرجاء ادخال القسم</span>");
+            return false;
+            }
+        else
+        if (form.CityId == null || form.CityId == "") {
+            $('.err_add_doctor').html("<span style='color:red'>الرجاء اختيار المدينة</span>");
+            return false;
+        }
+        else
+        if (form.InstId == null || form.InstId == "") {
+            $('.err_add_doctor').html("<span style='color:red'>الرجاء اختيار العيادة</span>");
+            return false;
+        }
+        console.log(form);
+         $.ajax({
+            type: "POST",
+            url: "/api/doctors/add",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    console.log(result.data);
+                    $('.post_success_comment').toggle();
+                   
+                }
+                else {
+
+                    toast_message(result.message);
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+</script>

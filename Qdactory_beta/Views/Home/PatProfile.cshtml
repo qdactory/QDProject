@@ -1,0 +1,246 @@
+﻿@model Qdactory_beta.Models.UserProfile
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+
+    .card-header {
+        max-height: 36px;
+        background-color: white;
+        border-bottom-color: white;
+    }
+
+    .card {
+        background-color: #ddd3;
+    }
+
+    .department-list img {
+        min-width: 32px;
+        min-height: 32px;
+        max-width: 32px;
+        max-height: 32px;
+    }
+
+    #talkjs-container {
+        width: 100% !important;
+        margin: 0px !important;
+        height: 90vh !important;
+        margin-top: 0px !important;
+    }
+</style>
+
+<div class="chat-content chat" style="display: none">
+    @if(Model.chatTalk.UserAllowed)
+    {
+    <partial name="_user_chatbox" model="Model.chatTalk" />
+    }
+</div>
+<div class="profile-content chat" dir="rtl" style="margin-top:20px;">
+    <h6>
+        @ViewBag.Today
+    </h6>
+    <h5 class="text-left">Hi, User_@Model.info.Id @ViewBag.Email</h5>
+    <div class="row mt-3">
+        @if(Model.chatTalk.UserAllowed){
+        <div class="media" style="margin:10px;padding: 12px;border-width: thick;border: solid 0.03rem grey;width:100%;border-radius:20px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRvRodfuTotn4ue9DnHf1DKNr2jM2Y84yR6YA&usqp=CAU" width="64" style="border-radius:18px" class="mr-3" alt="...">
+            <div class="media-body text-right">
+                <h5 style="display:inline-block; margin-right:10px; margin-top:16px;">المحادثات</h5>
+                <button style="float: left; margin-top:10px;" class="btn btn-link chat" onclick="$('.chat').toggle()">شاهد</button>
+            </div>
+        </div>
+        }
+        <div class="media" style="margin:10px;padding: 12px;border-width: thick;border: solid 0.03rem grey;width:100%;border-radius:20px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTg3lfb4Bj1Ojyz4HQYu_J2KcOw3dNDIPVhOg&usqp=CAU" width="64" style="border-radius:18px" class="mr-3" alt="...">
+            <div class="media-body text-right">
+                <h5 style="display:inline-block; margin-right:10px; margin-top:16px;">بيانات المستخدم</h5>
+                <button id="edit_btn_profile_edit" onclick="$('#profile_eidt').toggle(); $(this).toggle();" style="float: left; margin-top:10px;" class="btn btn-link chat">تعديل</button>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="text-right mt-4">
+        <form id="profile_eidt" style="display:none">
+            <p class="profile-feedback"></p>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">الاسم الأول</label>
+                <input type="text" class="form-control" id="F_NAME" placeholder="الاسم الأول" value="@Model.info.Names[0]">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">اسم العائلة</label>
+                <input type="text" class="form-control" id="L_NAME" placeholder="اسم العائلة" value="@Model.info.Names[1]">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">رقم الجوال</label>
+                <input type="text" class="form-control" id="PHONE_NUMBER" placeholder="رقم الجوال" value="@Model.info.Mobil">
+                <div class="error phone_err"></div>
+                <div class="ver_phone" style="display:none; padding:5px;">
+                    <div class="form-group">
+                        <label>ادخلل رقم التوثيق</label>
+                        <input type="number" id="sms_code" class="form-control" />
+                        <br/>
+                        <button type="button" onclick="pat_ver_phone($('#sms_code').val())" class="btn btn-outline-info">توثيق الرقم</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">البريد الإلكتروني</label>
+                <input type="email" class="form-control" id="EMAIL" placeholder="youremail@company.com" value="@ViewBag.Email">
+                <p class="error email_err"></p>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">كلمة المرور الجديدة</label>
+                <input type="password" class="form-control" id="PASSWORD" placeholder="youremail@company.com" value="@ViewBag.Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">الجنس</label>
+                <select class="form-control" id="GENDER" value="@Model.info.Gender">
+                    <option value="M">ذكر</option>
+                    <option value="F">انثى</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">تاريخ الميلاد</label>
+                <input type="date" class="form-control" id="DOB">
+            </div>
+            <hr />
+            <button class="btn btn-primary" type="button" onclick="UpdateProfile()">تحديث</button>
+            <button class="btn btn-link" onclick="$('#edit_btn_profile_edit').toggle(); $('#profile_eidt').toggle()" type="button">إلغاء</button>
+        </form>
+    </div>
+    <div class="text-right mt-4">
+        <h6>جميع الأطباء الذين قيمتهم</h6>
+        <hr />
+        <div class="owl-carousel promoted_docs owl-theme">
+            @foreach (var doc in @Model.doctors)
+            {
+            <partial name="_doctor_carousel_card" model="doc" />
+            }
+        </div>
+    </div>
+    <div class="col text-right mt-4 ">
+        <h6>جمييع التقييمات</h6>
+        <hr>
+        <div class="row row-cols-1 row-cols-md-1">
+            @foreach (var cmnt in @Model.comments)
+        {
+            <partial name="_comments_in_user_profile" model="cmnt" />
+        }
+        </div>
+    </div>
+</div>
+<script>
+    function UpdateProfile() {
+        var token = getCookie('user');
+        var form = {
+            F_NAME: $('#F_NAME').val(),
+            L_NAME: $('#L_NAME').val(),
+            GENDER: $('#GENDER').val(),
+            DOB: $('#DOB').val(),
+            EMAIL: $('#EMAIL').val(),
+            PHONE_NUMBER: $('#PHONE_NUMBER').val(),
+            PASSWORD: $('#PASSWORD').val(),
+            Token: token
+        };
+
+        console.log(form);
+        console.log(token);
+        $.ajax({
+            type: "POST",
+            url: "/api/members/updateprofile",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    console.log(result.data);
+                    $(".profile-feedback").html("<p style='color:red'>تم تحديث البيانات بنجاح</p>");
+
+                    if (result.data.updating_email) {
+                        if(!result.data.updateEmailSuccess)
+                        $('.email_err').html("<p style='color:red'>لم يتم تحديث البريد الإلكتروني لأنه مسجل مسبقا</p>");
+                    }
+
+                    if (result.data.updateing_phone) {
+                        if (!result.data.updatePhoneSuccess) {
+                            $('.phone_err').html("<p style='color:red;'>رقم الجوال مسجل مسبقا لا يمكن تغييره</p>");
+                        }
+                        else {
+                           
+                            toast_message('ستصلك رسالة لتوثيق رقم الجوال الجديد');
+                            $('.ver_phone').toggle();
+                        }
+                    }
+                }
+                else {
+
+                    $('.ver_error').html("<p style='color:red'>" + result.message + "</p>");
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+
+    function pat_ver_phone(code) {
+        var token = getCookie('user');
+        var form = {
+            PHONE_NUMBER: $('#PHONE_NUMBER').val(),
+            SmsCode:code,
+            Token: token
+        };
+         $.ajax({
+            type: "POST",
+            url: "/api/members/verifyphone",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    console.log(result.data);
+                   
+                    toast_message('تم تحديث رقم الجوال !');
+                }
+                else {
+
+                    $('.ver_error').html("<p style='color:red'>" + result.message + "</p>");
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function department_loadmore(data) {
+        if (typeof (data) !== "undefined") {
+
+            if (data !== null && data.length > 0) {
+
+                $('.spinner-border').addClass('d-none');
+                $('.load_more').attr("disabled", false);
+                for (var i = 0; i < data.length; i++) {
+                    $('.list_doctors').append(render($('#tempDoctor').html(), data[i]));
+                }
+            }
+            else {
+                $('.load_more').hide();
+            }
+        }
+        else {
+            $('.load_more').hide();
+        }
+
+    }
+</script>
+
+

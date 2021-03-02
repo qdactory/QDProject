@@ -1,0 +1,15 @@
+﻿@{
+<div class="col department-card">
+    <span class="d-none dept-tags">
+        @Model.Tags
+    </span>
+    <div class="card mb-3 text-center" style="padding:2px;">
+        <a href="/@Model.Profile_url">
+            <img src="https://qayimdactory.com/department/images/Alternative_Medicine.png" width="32" height="32" />
+            <br />
+            <lable class="text-center">@Model.Names[ViewBag.LangId]</lable>
+        </a>
+    </div>
+</div>
+}
+

@@ -1,0 +1,127 @@
+﻿ @{
+
+var inner_checked_doc = "checked";
+}
+
+<div class="col-sm-12 col-lg-6 text-center">
+    <div style="background-color: white !important;">
+        <img style="width:150px; height:150px;" data-src="@Model.info.Icon" class="lazy doctor-profile" alt="...">
+    </div>
+    @{
+            @if(Model.info.Doc_verified=="Y")
+            {
+                <div class="text-center">
+                    حساب موثق
+                </div>
+                    }
+                    else
+                    {
+                <div class="text-center">
+                    <a href="~/ar/claim/doctor/@Model.info.Id">اذا كنت هذا الطبيب وثق حسابك الآن</a>
+                </div>
+
+                    }
+     }
+
+</div>
+<div class="col-sm-12 col-lg-5 mt-3">
+            <div class="mx-auto" style="max-width:400px;">
+                <div style="min-height:110px; padding:12px;">
+                    <h1 class="text-center" style="font-size:18px;">@Model.info.Names[ViewBag.LangId]</h1>
+                    <h2 class="text-center text-muted" style="font-size:14px;">@Model.info.Dept_name</h2>
+                    <h3 class="text-center mt-2" style="font-size:12px;">@Model.info.SUB_SPEC[ViewBag.LangId]</h3>
+                    <h4 class="text-center">@Model.info.City_name</h4>
+                    <div class="text-center mt-2">
+                        <label>العيادات</label>
+                            <ul class="list-unstyled">
+                                @foreach(var inst in Model.info.Inst_names)
+                        {
+                                <li><a href='/clinic/@inst.Id/@inst.Name'>@inst.Name</a></li>
+                        }
+                        </ul>
+                    </div>
+
+                    <div class="row mx-auto" style="width: 168px;">
+                        <div class="col-6 text-center" style="border-right:solid #808080">
+                            @Model.info.Rate / 5
+                            <label style="font-size:10px; display:block; margin-bottom:1.5rem; cursor:pointer" onclick="$('#gradedetails').modal()">تفاصيل التقييم</label>
+
+                        </div>
+                        <div class="col-6 text-center" style="border-left:solid #808080">
+                            @Model.info.Total
+                            <label style="font-size:10px; display:block">التقييمات</label>
+                        </div>
+                    </div>
+                    <div class="row mx-auto" style="width:168px;">
+                        <p class="text-center mx-auto mt-2" style=" -webkit-box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);
+box-shadow: 2px 11px 31px -7px rgba(0,0,0,0.75);">
+                            <span class="fa fa-star @{ if (@Model.info.Rate > 0) {@inner_checked_doc}; } "></span>
+                            <span class="fa fa-star @{ if (@Model.info.Rate > 1) {@inner_checked_doc}; }"></span>
+                            <span class="fa fa-star @{ if (@Model.info.Rate > 2) {@inner_checked_doc}; }"></span>
+                            <span class="fa fa-star @{ if (@Model.info.Rate > 3) {@inner_checked_doc}; }"></span>
+                            <span class="fa fa-star @{ if (@Model.info.Rate > 4) {@inner_checked_doc}; } "></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="doctor-tool row text-center">
+                    @if(Model.ShowMobile && Model.AcceptApnt){
+                    <div class="col text-right">
+                        <button class="btn btn-danger" style="width:98px;" onclick="$('.form-apnt').toggle();">احجز موعد</button>
+                        <div class="form-apnt" style="display:none">
+                            <div class="form-group">
+                                <label>اختر العيادة</label>
+                                <select class="form-control">
+                                    @foreach(var inst in Model.info.Inst_names)
+                            {
+                                    @if(inst.AccetFormApnt)
+                            {
+                                    <option value="@inst.Email">@inst.Name</option>
+                            }
+                            }
+                                </select>
+
+                            </div>
+                            <partial name="_appointment_form_within_doctor" />
+                        </div>
+
+                    </div>
+                    <div class="col text-left">
+                        <a href="tel:@Model.Call" class="btn btn-info" style="width:98px;">اتصل بنا</a>
+                    </div>
+                }
+                else
+                    @if(Model.AcceptApnt)
+                {
+                    <div class="col text-center">
+                        <button class="btn btn-danger" style="width:98px;" onclick="$('.form-apnt').toggle();">احجز موعد</button>
+                        <div class="form-apnt" style="display:none">
+                            <div class="form-group">
+                                <label>اختر العيادة</label>
+                                <select class="form-control">
+                                    @foreach(var inst in Model.info.Inst_names)
+                        {
+                                    @if(inst.AccetFormApnt)
+                        {
+                                    <option value="@inst.Email">@inst.Name</option>
+                        }
+                        }
+                                </select>
+
+                            </div>
+                            <partial name="_appointment_form_within_doctor" />
+                        </div>
+
+                    </div>
+
+                }
+                else
+                    @if(Model.ShowMobile)
+                    {
+                    <div class="col text-center">
+                        <a href="tel:@Model.Call" class="btn btn-info" style="width:98px;">اتصل بنا</a>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>

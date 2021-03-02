@@ -1,0 +1,29 @@
+﻿@{
+    var checked_inst = "checked";
+
+        <div class="col-6 mb-4">
+            <div class="card">
+                <img onclick="window.open('/@@Model.Profile_url','_SELF')" data-src="@Model.Icon" class="lazy card-img-top" alt="...">
+                <div class="card-body">
+
+                    @if (@Model.Id > 0)
+                    {
+                        <h5 class="card-title text-center" style="font-size: 14px; color: #0979C0; margin-top: -10px;"><a href="@Model.Profile_url">@Model.Names[ViewBag.LangId]</a></h5>
+                        <p class="card-text text-center starz_spans">
+                            <span class="fa fa-star @{ if (@Model.Rate > 0) {@checked_inst }; } "></span>
+                            <span class="fa fa-star @{ if (@Model.Rate > 1) {@checked_inst }; }"></span>
+                            <span class="fa fa-star @{ if (@Model.Rate > 2) {@checked_inst }; }"></span>
+                            <span class="fa fa-star @{ if (@Model.Rate > 3) {@checked_inst }; }"></span>
+                            <span class="fa fa-star @{ if (@Model.Rate > 4) {@checked_inst}; } "></span>
+                        </p>
+                    }
+                    else
+                    {
+                        <h5 class="card-title text-center" style="font-size:14px; color:#0979C0; margin-top:-10px;"><a class="btn-primary btn-sm btn-block" href="@Model.Profile_url">@Model.Names[ViewBag.LangId]</a></h5>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+}

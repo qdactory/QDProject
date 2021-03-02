@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="post_success_comment text-center" style="display:none">
+                <img width="100" src="https://static.wixstatic.com/media/ce46d9_3f38fd870f0e44df928485e2e1c7686b~mv2.gif" />
+                <h6 class="text-center">تم استلام الرسالة بنجاح</h6>
+            </div>
+            <form style="max-width:600px" class="mx-auto post_success_comment">
+                <div class="form-group">
+                    <label>اسمك</label>
+                    <input type="text" class="form-control" id="CONTACT_FULLNAME" placeholder="الاسم الاول">
+                </div>
+                <div class="form-group">
+                    <label>رقم الجوال</label>
+                    <input type="text" class="form-control" id="CONTACT_PHONE" placeholder="اسم الأب">
+                </div>
+                <div class="form-group">
+                    <label>الموضوع</label>
+                    <select id="CONTACT_SUBJECT" class="form-control">
+                        <option>مشكلة تقنية</option>
+                        <option>تسجيل طبيب</option>
+                        <option>تسجيل منشأة</option>
+                        <option>اضافة مدينة</option>
+                        <option>اضافة قسم طبي</option>
+                        <option>أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الموضوع</label>
+                    <textarea id="CONTACT_MESSAGE" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary" type="button" onclick="send_message()">ارسل</button>
+                    <button class="btn btn-outline-danger" type="reset">مسح</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-3">
+            <address>
+                One Microsoft Way<br />
+                Redmond, WA 98052-6399<br />
+                <abbr title="Phone">P:</abbr>
+                425.555.0100
+            </address>
+            <address>
+                <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+            </address>
+        </div>
+    </div>
+</div>
+
+<script>
+    function send_message() {
+        var fullname = $('#CONTACT_FULLNAME');
+        var phone = $('#CONTACT_PHONE');
+        var subject = $('#CONTACT_SUBJECT');
+        var message = $('#CONTACT_MESSAGE');
+        var form = {
+            Fullname: fullname,
+            Phone: phone,
+            Subject: subject,
+            Message: message
+        };
+        console.log(form);
+    }
+</script>

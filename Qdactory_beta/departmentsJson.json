@@ -1,0 +1,334 @@
+[
+	{
+		"Id": 57,
+		"Names": [ "الطب البديل", "Alternative Medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Alternative_Medicine",
+		"Tags": "الطب البديل, طب بديل, علاج بديل"
+	},
+	{
+		"Id": 58,
+		"Names": [ "التخدير والعناية المركزة", "Anaesthesia & Intinsive Care" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Anaesthesia_and_Intinsive_Care",
+		"Tags": "تخدير, التخدير,عناية,مركزة,العناية, العناية المركزة"
+	},
+	{
+		"Id": 59,
+		"Names": [ "جراحة القلب", "Cardiac Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Cardiac_Surgery",
+		"Tags": "جراحه القلب"
+	},
+	{
+		"Id": 60,
+		"Names": [ "أمراض القلب", "Cardiology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Cardiology",
+		"Tags": "امراض القلب, مرض قلب"
+	},
+	{
+		"Id": 61,
+		"Names": [ "الطب السريري", "Clinical medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Clinical_medicine",
+		"Tags": "الطب السريري, السريري, طب سريري"
+	},
+	{
+		"Id": 62,
+		"Names": [ "الأسنان", "Dentistry" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Dentistry",
+		"Tags": "أسنان, اسنان"
+	},
+	{
+		"Id": 63,
+		"Names": [ "الأمراض الجلدية", "Dermatology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Dermatology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 64,
+		"Names": [ "السكري وأمراض الغدد الصماء", "Diabetic_and_Endocrinology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Diabetic_and_Endocrinology",
+		"Tags": "السكري, غدد صماء,سكري,السكر"
+	},
+	{
+		"Id": 65,
+		"Names": [ "التغذية", "Dietary" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Dietary",
+		"Tags": "تعذيه,تغذية,غذاء,الحمية,الحميه,الحميه الغذائية"
+	},
+	{
+		"Id": 66,
+		"Names": [ "طب الطواريء", "Emergency_Medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Emergency_Medicine",
+		"Tags": "طب طواريء,طواريء,طواري,الطواريء,الطواري"
+	},
+	{
+		"Id": 68,
+		"Names": [ "الأمراض الجلدية", "ENT" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "ENT",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 69,
+		"Names": [ "طب العائلة", "Family_Medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Family_Medicine",
+		"Tags": "طب العائلة,طب العائله,طبيب عائلي"
+	},
+	{
+		"Id": 70,
+		"Names": [ "Gastroenterology", "Gastroenterology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Gastroenterology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 71,
+		"Names": [ "جراحة عامة", "General_Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "General_Surgery",
+		"Tags": "جراحه عامة,جراحة عامه,جراحة عامة,الجراحة العامة"
+	},
+	{
+		"Id": 72,
+		"Names": [ "الوراثة", "Genetics" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Genetics",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+	{
+		"Id": 73,
+		"Names": [ "Hematology", "Hematology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Hematology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+	{
+		"Id": 74,
+		"Names": [ "الطب الوقائي", "Immunology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Immunology",
+		"Tags": "طب وقائي, الطب الوقائي,الوقائي"
+	},
+
+	{
+		"Id": 75,
+		"Names": [ "الأمراض المعدية", "Infectious_Disease" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Infectious_Disease",
+		"Tags": "امراض معدية, أمراض المعدية,أمراض معديه"
+	},
+
+	{
+		"Id": 76,
+		"Names": [ "العلاج الداخلي", "Internal_Medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Internal_Medicine",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+	{
+		"Id": 77,
+		"Names": [ "تحاليل", "Laboratory" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Laboratory",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+
+	{
+		"Id": 78,
+		"Names": [ "Maxillofacial", "Maxillofacial" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Maxillofacial",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+
+	{
+		"Id": 79,
+		"Names": [ "Nephrology", "Nephrology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Nephrology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+
+	{
+		"Id": 80,
+		"Names": [ "الأعصاب", "Neurology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Neurology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+
+
+	{
+		"Id": 81,
+		"Names": [ "جراحة الأعصاب", "Neurosurgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Neurosurgery",
+		"Tags": "جراحة الأعصاب,جراحه أعصاب,جراحه اعصاب"
+	},
+
+
+	{
+		"Id": 82,
+		"Names": [ "OBGYN", "OBGYN" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "OBGYN",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 83,
+		"Names": [ "Oncology", "Oncology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Oncology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 84,
+		"Names": [ "Ophthalmology", "Ophthalmology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Ophthalmology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 86,
+		"Names": [ "جراحة العظام", "Orthopaedic Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Orthopaedic_Surgery",
+		"Tags": "جراحه, عظام,جراحة,العظام"
+	},
+	{
+		"Id": 87,
+		"Names": [ "جراحة الأطفال", "Pediatric Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Pediatric Surgery",
+		"Tags": "جراحة اطفال, جراحة الاطفال,جراحة أطفال,جراحه اطفال"
+	},
+	{
+		"Id": 88,
+		"Names": [ "الأطفال", "Pediatrics" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Pediatrics",
+		"Tags": "اطفال,الأطفال"
+	},
+	{
+		"Id": 89,
+		"Names": [ "Pharmacology", "Pharmacology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Pharmacology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 90,
+		"Names": [ "علاج طبيعي", "Physical_Therapy" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Physical_Therapy",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 91,
+		"Names": [ "الجراحة التجميلية", "Plastic_Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Plastic_Surgery",
+		"Tags": "جراحة التجميلية, الجراحه التجميليه,الجراحة التجميلية"
+	},
+	{
+		"Id": 92,
+		"Names": [ "Podiatric Surgery", "Podiatric Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Podiatric_Surgery",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 93,
+		"Names": [ "علاج نفسي", "Psychiatry" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Psychiatry",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 94,
+		"Names": [ "الصحة العامة والوقاية", "Public Health and Preventive Medicine" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Public_Health_and_Preventive_Medicine",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 95,
+		"Names": [ "Pulmonology", "Pulmonology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Pulmonology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 96,
+		"Names": [ "Radiology", "Radiology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Radiology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 97,
+		"Names": [ "Rheumatology", "Rheumatology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Rheumatology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 98,
+		"Names": [ "علاج تغذية", "Therapeutic Nutrition" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Therapeutic_Nutrition",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 99,
+		"Names": [ "علاج طبيعي", "Urology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Urology",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 100,
+		"Names": [ "جراحة الشرايين", "Vascular_Surgery" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Vascular_Surgery",
+		"Tags": "جلدية, امراض جلدية, امراض جلديه, جلديه"
+	},
+	{
+		"Id": 101,
+		"Names": [ "الأمراض المعدية", "Venereology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Venereology",
+		"Tags": "امراض معديه, امراض معدية,أمراض معديه"
+	},
+	{
+		"Id": 102,
+		"Names": [ "العقم", "Infertility" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Infertility",
+		"Tags": "العقم"
+	},
+	{
+		"Id": 104,
+		"Names": [ "تحليل الإشعاعي", "Diagnostic_Radiology" ],
+		"Icon": "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-24_icon-icons.com_73920.png",
+		"Profile_url": "Diagnostic_Radiology",
+		"Tags": "تحليل اشعاعي"
+	}
+
+
+]

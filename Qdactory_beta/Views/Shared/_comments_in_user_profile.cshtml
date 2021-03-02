@@ -1,0 +1,63 @@
+﻿@{
+    var cmnt = @Model;
+        var inner_checked_cmnt = "checked";
+
+   <div class="col mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <p class="text-left" style="display:inline; float:left;">
+                        <img style="min-height:34px; max-height:34px; min-width:34px; max-width:34px !important;" data-src="https://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png" width="34" height="34" class="lazy"/>
+                        <b>@cmnt.UserId</b>
+                    </p>
+                    <p class="text-right">
+
+                        <span class="fa fa-star @{ if (@cmnt.Rate > 0) {@inner_checked_cmnt }; } "></span>
+                        <span class="fa fa-star @{ if (@cmnt.Rate > 1) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@cmnt.Rate > 2) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@cmnt.Rate > 3) {@inner_checked_cmnt }; }"></span>
+                        <span class="fa fa-star @{ if (@cmnt.Rate > 4) {@inner_checked_cmnt }; } "></span>
+
+                        <span style="color:darkgrey; display:block; margin-top:-10px;">@cmnt.Date</span>
+                    </p>
+                </div>
+                <div class="card-body text-center" dir="rtl" style="zoom:92%;">
+                    <p style="min-height:30px;">
+                        @cmnt.Text
+                    </p>
+                    <small><a href="/clinic/@cmnt.Instid/@cmnt.Instname">@cmnt.Instname</a></small>
+                    <hr />
+                    <span class="badge badge-light">
+                        @cmnt.Pol
+                        <br />
+                        حسن التعامل
+                    </span>
+                    <span class="badge badge-light">
+                        @cmnt.Stuf
+                        <br />
+                        الطاقم الطبي
+                    </span>
+                    <span class="badge badge-light">
+                        @cmnt.Know
+                        <br />
+                        الخبرة
+                    </span>
+                    <span class="badge badge-light">
+                        @cmnt.Punc
+                        <br />
+                        الدقة
+                    </span>
+                    <span class="badge badge-light">
+                        @cmnt.Rrec
+                        <br />
+                        الاستقبال
+                    </span>
+                    <div class="row mt-2" style="padding: 2px;">
+                        <div class="text-left">
+                            <label>الإعجابات</label>
+                            <sub style="display:block">@cmnt.Likes</sub>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}

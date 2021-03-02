@@ -1,0 +1,80 @@
+﻿{
+  "Label_institutes": {
+    "ar": "العيادات",
+    "en": "institution"
+  },
+  "Link_more": {
+    "ar": "المزيد",
+    "en": "more"
+  },
+  "Label_spec_doctors": {
+    "ar": "الأطباء المميزين",
+    "en": "Special doctors"
+  },
+  "Label_medical_departments": {
+    "ar": "الأقسام الطبية",
+    "en": "medical departments"
+  },
+  "Placeholder_search_by_doctor_name": {
+    "ar": "ابحث باسم الطبيب",
+    "en": "search by doctor name"
+  },
+  "Placeholder_search_by_dep_name": {
+    "ar": "ابحث عن التخصص",
+    "en": "search department"
+  },
+  "Link_are_you_doctor": {
+    "ar": " هل أنت طبيب؟ وثق حسابك",
+    "en": "are you a doctor? verify now"
+  },
+  "Label_set_location": {
+    "ar": "تحديد الموقع الجغرافي",
+    "en": "set location"
+  },
+  "Label_best_doctors_in": {
+    "ar": "الأطباء المميزون في قسم",
+    "en": "Best doctors in "
+
+  },
+  "Feedback_not_doctors_in": {
+    "ar": "لا يوجد اطباء في قسم",
+    "en": "No doctors in "
+
+  },
+  "Label_doctors_in": {
+    "ar": "جميع أطباء قسم",
+    "en": "All doctors in "
+
+  },
+  "Label_information_about_dept": {
+    "ar": "صفحة قسم",
+    "en": "Page of  "
+
+  },
+  "Button_login": {
+    "ar": "تسجيل الدخول",
+    "en": "Login"
+
+  },
+  "Button_save": {
+    "ar": "حفظ",
+    "en": "save"
+  },
+  "Button_search_inst": {
+    "ar": "ابحث عن عيادة",
+    "en": "Find clinic"
+  },
+  "Label_comments": {
+    "ar": "التقييمات",
+    "en": "comments"
+  },
+  "Button_close": {
+    "ar": "غلق",
+    "en": "close"
+  },
+  "Placeholder_search_by_inst_name": {
+    "ar": "ابحث باسم العيادة",
+    "en": "find clinic by name"
+  }
+
+}

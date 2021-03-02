@@ -1,0 +1,434 @@
+﻿@model Qdactory_beta.Models.DoctorProfile
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="chat-content chat" style="display: none">
+    @if(Model.chatTalk.DoctorActivated &&  Model.chatTalk.UserAllowed)
+    {
+    <partial name="_chat_to_doctor" model="Model.chatTalk" />
+    }
+</div>
+<div class="doctor-contents chat">
+    <div class="text-right mt-4">
+        <h6>معلومات الطبيب</h6>
+        <hr>
+        <div class="row">
+            <partial name="_doctor_info_card" model="Model" />
+        </div>
+
+        <div class="modal fade" id="gradedetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">تفاصيل التقييم</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                حسن التعامل
+                                <span class="badge badge-primary badge-pill">@Model.DocRatingDetails.Pol</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                المعرفة
+                                <span class="badge badge-primary badge-pill">@Model.DocRatingDetails.Know</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                الاستقبال
+                                <span class="badge badge-primary badge-pill">@Model.DocRatingDetails.Rrec</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                               الطاقم الطبي
+                                <span class="badge badge-primary badge-pill">@Model.DocRatingDetails.Stuf</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                الدقة
+                                <span class="badge badge-primary badge-pill">@Model.DocRatingDetails.Punc</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        <div class="mt-4">
+            <div class="text-center mb-2">
+                @if (ViewBag.LoggedIn)
+                {
+                    <button onclick="RateThisDoctor()" type="button" class="btn btn-outline-info">قيم الطبيب</button>
+                }
+            </div>
+            <div class="text-center">
+                @if (Model.chatTalk.DoctorActivated && Model.chatTalk.UserAllowed)
+                {
+                    <button onclick="$('.chat').toggle()" class="btn btn-outline-info chat text-center">دردش الآن</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-4">
+        @if (!Model.ActivePackage)
+        {
+        <h6>أطباء في نفس التخصص</h6>
+        <hr>
+        <div class="">
+            <div class="owl-carousel promoted_docs owl-theme">
+
+                @foreach (var doc in @Model.otherdoctors)
+            {
+                <partial name="_doctor_carousel_card" model="doc" />
+                }
+            </div>
+
+
+        </div>
+        }
+    </div>
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col text-right mt-4 ">
+            <h6>التقييمات</h6>
+            <hr>
+            <div class="row row-cols-1 row-cols-md-1 list_comments">
+                @foreach (var cmnt in @Model.comments)
+            {
+                <partial name="_comments_in_doctor_profile" model="cmnt" />
+            }
+
+            </div>
+            <div class="text-center mt-4">
+                @{
+
+                    @if(Model.comments.Count>5)
+                    {
+                    <button onclick="LoadMore('comments_in_doctor_page','@Model.info.Id','@ViewBag.Lang')" class="btn btn-primary load_more" type="button">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        تحميل المزيد
+                    </button>
+                    }
+                    else
+                    {
+                    <h6 class="text-muted">لا توجد تقييمات اضافية, نقوم فقط باظهار التقييمات التي تحمل تعليقا</h6>
+                    <hr />
+                    }
+                }
+
+
+
+            </div>
+        </div>
+        <div class="col text-right mt-4">
+            <h6>العروض</h6>
+            <hr>
+            <h6 class="text-center text-muted">لم يقدم هذا الطبيب أي عروض</h6>
+            @*<div class="row row-cols-1 row-cols-md-3">
+
+
+                </div>*@
+        </div>
+    </div>
+    <div class="text-right mt-4">
+        <h6>@ViewBag.Label_medical_departments </h6>
+        <span class="text-left"><input id="search_dept" class="form-control" style=" box-shadow: none; border: 0; width:180px;" type="text" placeholder="@ViewBag.Placeholder_search_by_dep_name" /></span>
+        <hr>
+        <div class="owl-carousel department-list owl-theme">
+            @foreach (var dep in @Model.departments)
+        {
+            <partial name="_departments_carousel_card" model="dep" />
+        }
+        </div>
+        <hr />
+    </div>
+    <partial name="_footer_info" />
+    <div style="min-height:200px;"></div>
+
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">تقييم الطبيب</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="DOC_ID" value="@Model.LoggedInUserComment.DocId" />
+            <input type="hidden" id="DOC_REV_ID" value="@Model.LoggedInUserComment.Id" />
+            <div class="modal-body">
+                <div class="post_success_comment text-center" style="display:none">
+                    <img width="100" src="https://static.wixstatic.com/media/ce46d9_3f38fd870f0e44df928485e2e1c7686b~mv2.gif" />
+                </div>
+                <form id="usercomment" class="post_success_comment">
+                    <div class="form-group">
+                        <label>اختر العيادة</label>
+                        <select x-value="@Model.LoggedInUserComment.Instid" class="form-control" id="INST_ID">
+                            @foreach(var inst in Model.info.Inst_names)
+                            {
+                            <option value="@inst.Id">@inst.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>حسن التعامل</label>
+                        <select x-value="@Model.LoggedInUserComment.Pol" class="form-control" id="Polite">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الطاقم الطبي</label>
+                        <select x-value="@Model.LoggedInUserComment.Stuf" class="form-control" id="Staff">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الخبرة</label>
+                        <select x-value="@Model.LoggedInUserComment.Know" class="form-control" id="Knowledge">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الدقة</label>
+                        <select x-value="@Model.LoggedInUserComment.Punc" class="form-control" id="Punc">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الاستقبال</label>
+                        <select x-value="@Model.LoggedInUserComment.Rrec" class="form-control" id="Reception">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="Comment">@Model.LoggedInUserComment.Text</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer post_success_comment">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                <button type="button" class="btn btn-primary" onclick="applycomment()">اعتمد التقييم</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/template" id="tempComment">
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-header">
+                <p class="text-left" style="display:inline; float:left;">
+                    <img style="min-height:34px; max-height:34px; min-width:34px; max-width:34px !important;" src="https://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png" />
+                    <b>{{userId}}</b>
+                </p>
+                <p class="text-right">
+                    {{rate}}
+
+                    <span style="color:darkgrey; display:block; margin-top:-10px;">{{date}}</span>
+                </p>
+            </div>
+            <div class="card-body text-center" dir="rtl" style="zoom:92%;">
+                <p style="min-height:30px;">
+                    {{text}}
+                </p>
+                <small><a href="/clinic/{{instid}}/{{instname}}">{{instname}}</a></small>
+                <hr />
+                <span class="badge badge-light">
+                    {{pol}}
+                    <br />
+                    حسن التعامل
+                </span>
+                <span class="badge badge-light">
+                    {{stuf}}
+                    <br />
+                    الطاقم الطبي
+                </span>
+                <span class="badge badge-light">
+                    {{know}}
+                    <br />
+                    الخبرة
+                </span>
+                <span class="badge badge-light">
+                    {{punc}}
+                    <br />
+                    الدقة
+                </span>
+                <span class="badge badge-light">
+                    {{rrec}}
+                    <br />
+                    الاستقبال
+                </span>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    function RateThisDoctor() {
+        $('#staticBackdrop').modal();
+    }
+    function comments_loadmore(data) {
+        if (typeof (data) !== "undefined") {
+
+            if (data !== null && data.length > 0) {
+
+                $('.spinner-border').addClass('d-none');
+                $('.load_more').attr("disabled", false);
+                for (var i = 0; i < data.length; i++) {
+                    var rate = "";
+                    if (data[i].rate == 0) {
+                        rate = '<span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span>';
+
+                    }
+                    if (data[i].rate > 0) {
+                        rate = '<span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span>';
+                    }
+
+                    if (data[i].rate > 1) {
+                        rate = '<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span>';
+                    }
+                    if (data[i].rate > 2) {
+                        rate = '<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span>';
+                    }
+
+                    if (data[i].rate > 3) {
+                        rate = '<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>';
+
+                    }
+                    if (data[i].rate > 4) {
+                        rate = '<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>';
+                    }
+                    data[i].rate = rate;
+                    $('.list_comments').append(render($('#tempComment').html(), data[i]));
+                }
+            }
+            else {
+                $('.load_more').hide();
+            }
+        }
+        else {
+            $('.load_more').hide();
+        }
+
+    }
+    function applycomment() {
+        var doc_rev_id = $('#DOC_REV_ID').val();
+        var polite = $('#Polite').val();
+        var know = $('#Knowledge').val();
+        var punc = $('#Punc').val();
+        var rec = $('#Reception').val();
+        var staff = $('#Staff').val();
+        var cmnt = $('#Comment').val();
+        var docid = $('#DOC_ID').val();
+        var instid = $('#INST_ID').val();
+
+        if (doc_rev_id != null && doc_rev_id != "" && doc_rev_id>0) {
+            /* it is an update */
+            update_user_comment(doc_rev_id,polite, know, punc, rec, staff, cmnt, docid);
+        }
+        else {
+            add_user_comment(polite, know, punc, rec, staff, cmnt, docid,instid)
+        }
+    }
+    function add_user_comment(polite, know, punc, rec, staff, cmnt, docid,instid) {
+        var token = getCookie('user');
+        var form = {
+            Pol: polite,
+            Rrec: rec,
+            Punc: punc,
+            Stuf: staff,
+            Know: know,
+            Text: cmnt,
+            DocId: docid,
+            Instid:instid,
+            Token: token
+        };
+        console.log(form);
+        $.ajax({
+            type: "POST",
+            url: "/api/comments/add",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    console.log(result.data);
+                    $('.post_success_comment').toggle();
+                    setTimeout(function () { location.reload();},3000);
+                   // toast_message('تم اضافة التقييم');
+                }
+                else {
+
+                    toast_message(result.message);
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+    function update_user_comment(doc_rev_id, polite, know, punc, rec, staff, cmnt, docid) {
+        var token = getCookie('user');
+        var form = {
+            Pol: polite,
+            Rrec: rec,
+            Punc: punc,
+            Stuf: staff,
+            Know: know,
+            Text: cmnt,
+            DocId: docid,
+            Token: token
+        };
+        $.ajax({
+            type: "POST",
+            url: "/api/comments/" + doc_rev_id + "/update",
+            async: true,
+            cache: false,
+            type: 'POST',
+            data: form,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000.000.000") {
+                    console.log(result.data);
+                    $('.post_success_comment').toggle();
+                    setTimeout(function () { location.reload();},3000);
+                   // toast_message('تم اضافة التقييم');
+                }
+                else {
+
+                    toast_message(result.message);
+                }
+            },
+            error: function (jqXHR, exception) {
+                alert(exception);
+            }
+        });
+    }
+</script>
+
+
